@@ -6,15 +6,19 @@ class ListAllUsersController {
   constructor(private listAllUsersUseCase: ListAllUsersUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    const { user_id } = request.headers;
+    try {
+      const { user_id } = request.headers;
 
-    if (typeof user_id === "object") {
-      throw new Error("Only one id expected");
+      if (typeof user_id === "object") {
+        throw new Error("Only one id expected");
+      }
+
+      const users = this.listAllUsersUseCase.execute({ user_id });
+
+      return response.status(200).json(users);
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
     }
-
-    const users = this.listAllUsersUseCase.execute({ user_id });
-
-    return response.status(200).json(users);
   }
 }
 

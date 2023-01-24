@@ -15,10 +15,6 @@ class TurnUserAdminUseCase {
       throw new Error("User not found");
     }
 
-    if (exists.admin) {
-      throw new Error("User already is an administrator");
-    }
-
     const user = this.usersRepository.turnAdmin(exists);
 
     return user;
