@@ -28,7 +28,7 @@
                 },
                 "example": {
                   "name": "Name Sample",
-                  "description": "user@email.com"
+                  "email": "user@email.com"
                 }
               }
             }
@@ -82,6 +82,85 @@
                   },
                   "example": {
                     "error": "Email already in use"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get users",
+        "description": "Retrieves a list of existing users upon receiving a valid id",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "ID of an existing user account with admin permissions",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array containing JSON objects representing users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "User": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "admin": {
+                          "type": "boolean"
+                        },
+                        "created_at": {
+                          "type": "DateTime"
+                        },
+                        "updated_at": {
+                          "type": "DateTime"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "835446ba-e16a-400e-8870-bfe1e2b8e432",
+                      "admin": true,
+                      "created_at": "2023-01-26T01:02:01.003Z",
+                      "updated_at": "2023-01-26T01:02:01.003Z",
+                      "name": "Name Sample"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A JSON object containing an error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found"
                   }
                 }
               }
