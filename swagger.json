@@ -8,7 +8,9 @@
   "paths": {
     "/users": {
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Create a category",
         "description": "Create a new category",
         "requestBody": {
@@ -54,7 +56,7 @@
                     },
                     "name": {
                       "type": "string"
-                    }                  
+                    }
                   },
                   "example": {
                     "id": "835446ba-e16a-400e-8870-bfe1e2b8e432",
@@ -76,10 +78,84 @@
                   "properties": {
                     "error": {
                       "type": "string"
-                    }                  
+                    }
                   },
                   "example": {
                     "error": "Email already in use"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Turn user admin",
+        "description": "Turn an user account into administrator",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of an existing user account",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the user updated informations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "type": "DateTime"
+                    },
+                    "updated_at": {
+                      "type": "DateTime"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "835446ba-e16a-400e-8870-bfe1e2b8e432",
+                    "admin": true,
+                    "created_at": "2023-01-26T01:02:01.003Z",
+                    "updated_at": "2023-01-26T01:02:01.003Z",
+                    "name": "Name Sample"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "A JSON object containing an error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found"
                   }
                 }
               }
