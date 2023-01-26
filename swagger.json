@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Introdução ao Solid Ignite Documentation",
+    "description": "This is an learning user API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a category",
+        "description": "Create a new category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Name Sample",
+                  "description": "user@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A JSON object containing the user created informations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "type": "DateTime"
+                    },
+                    "updated_at": {
+                      "type": "DateTime"
+                    },
+                    "name": {
+                      "type": "string"
+                    }                  
+                  },
+                  "example": {
+                    "id": "835446ba-e16a-400e-8870-bfe1e2b8e432",
+                    "admin": false,
+                    "created_at": "2023-01-26T01:02:01.003Z",
+                    "updated_at": "2023-01-26T01:02:01.003Z",
+                    "name": "Name Sample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A JSON object containing an error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }                  
+                  },
+                  "example": {
+                    "error": "Email already in use"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
