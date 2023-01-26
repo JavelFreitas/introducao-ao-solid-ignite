@@ -163,6 +163,80 @@
           }
         }
       }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user by id",
+        "description": "Retrieves an existing user upon receiving a valid id",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of an existing user account",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the user informations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "type": "DateTime"
+                    },
+                    "updated_at": {
+                      "type": "DateTime"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "835446ba-e16a-400e-8870-bfe1e2b8e432",
+                    "admin": true,
+                    "created_at": "2023-01-26T01:02:01.003Z",
+                    "updated_at": "2023-01-26T01:02:01.003Z",
+                    "name": "Name Sample"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "A JSON object containing an error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
